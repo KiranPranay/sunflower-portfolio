@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   BASE — light, warm, cute
+   ============================================================ */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-cream font-sans text-plum-700 antialiased;
+    background-image:
+      radial-gradient(60% 45% at 8% 0%, rgba(255, 169, 198, 0.28), transparent 60%),
+      radial-gradient(45% 40% at 100% 8%, rgba(201, 184, 247, 0.26), transparent 60%),
+      radial-gradient(40% 40% at 100% 100%, rgba(255, 206, 84, 0.16), transparent 60%),
+      radial-gradient(45% 40% at 0% 100%, rgba(159, 220, 191, 0.2), transparent 60%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(255, 135, 171, 0.35);
+    color: #2c2038;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-semibold text-plum-900;
+    letter-spacing: -0.01em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   REUSABLE COMPONENT CLASSES
+   ============================================================ */
+@layer components {
+  .section {
+    @apply relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-24;
+  }
+
+  /* Soft pillowy card (main card style) */
+  .soft-card {
+    @apply rounded-[1.75rem] border-2 border-white bg-white/80 shadow-soft backdrop-blur-sm;
+    box-shadow: 0 22px 50px -26px rgba(74, 58, 86, 0.3);
+  }
+
+  /* Sticker card — playful cut-out look with a hard offset shadow */
+  .sticker-card {
+    @apply rounded-[1.6rem] border-2 border-plum-900/10 bg-white;
+    box-shadow: 4px 5px 0 0 rgba(44, 32, 56, 0.08);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-rose-400 via-lilac-400 to-peach-400 bg-clip-text text-transparent;
+  }
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-rose-500 via-peach-400 to-butter-400 bg-clip-text text-transparent;
+  }
+  .text-gradient-anim {
+    background-image: linear-gradient(
+      110deg,
+      #fb6f9e,
+      #b49df0,
+      #ffce54,
+      #78cda3,
+      #fb6f9e
+    );
+    background-size: 220% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-move 8s ease infinite;
+  }
+
+  /* Handwritten eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-hand text-xl font-bold text-rose-500;
+    transform: rotate(-2deg);
+  }
+
+  /* Little pastel chip / tag */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-plum-900/5 bg-cream-200
+           px-3 py-1.5 text-sm font-semibold text-plum-700 transition;
+  }
+
+  /* Buttons — bouncy pills */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
+           text-sm font-bold transition-all duration-300 will-change-transform;
+  }
+  .btn-primary {
+    @apply btn text-white;
+    background-image: linear-gradient(120deg, #ff87ab, #b49df0 60%, #9d7fe8);
+    box-shadow: 0 12px 26px -10px rgba(157, 127, 232, 0.7);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px) rotate(-1deg);
+    box-shadow: 0 16px 30px -10px rgba(251, 111, 158, 0.7);
+  }
+  .btn-ghost {
+    @apply btn border-2 border-rose-300 bg-white text-plum-700 hover:bg-rose-100;
+  }
+  .btn-ghost:hover {
+    transform: translateY(-2px) rotate(1deg);
+  }
+
+  /* Decorative dotted background layer */
+  .doodle-bg {
+    background-image: radial-gradient(rgba(157, 127, 232, 0.16) 1.6px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+
+  /* Soft blurred pastel halo */
+  .halo {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+  }
+}
+
+/* Animated gradient keyframe (used by .text-gradient-anim) */
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================================
+   CUTE PASTEL SCROLLBAR
+   ============================================================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffa9c6 rgba(255, 244, 236, 0.9);
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #fff4ec;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 3px solid #fff4ec;
+  background-clip: content-box;
+  background-image: linear-gradient(180deg, #ff87ab, #b49df0, #78cda3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(180deg, #fb6f9e, #9d7fe8, #54bd89);
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.draw-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: dash 3s ease forwards;
+}
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
